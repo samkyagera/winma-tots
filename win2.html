@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winma tots - Daycare & Pre-Nursery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape.circle {
+            width: 80px;
+            height: 80px;
+            background: #fff;
+            border-radius: 50%;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape.triangle {
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 70px solid #fff;
+            top: 60%;
+            right: 20%;
+            animation-delay: -2s;
+        }
+
+        .shape.square {
+            width: 60px;
+            height: 60px;
+            background: #fff;
+            top: 30%;
+            right: 10%;
+            animation-delay: -4s;
+            transform: rotate(45deg);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(255,255,255,0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotate(360deg);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .programs {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .program-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .program-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+
+        .program-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .interactive-gallery {
+            background: #f8f9ff;
+            position: relative;
+        }
+
+        .gallery-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .gallery-tab {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            color: #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .gallery-tab.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .gallery-tab:hover:not(.active) {
+            background: #667eea;
+            color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            z-index: 10;
+        }
+
+        .gallery-item-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-item-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-item-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-item-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .upload-section {
+            background: white;
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 3rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-section:hover {
+            border-color: #764ba2;
+            background: #f8f9ff;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .upload-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .upload-section p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            animation: modalPop 0.3s ease-out;
+        }
+
+        @keyframes modalPop {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 15px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: #ff6b6b;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-info {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0 0 15px 15px;
+            text-align: center;
+        }
+
+        .modal-info h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-info p {
+            color: #666;
+        }
+
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.9);
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+
+        .floating-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 107, 107, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section {
+                padding: 4rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav" id="navbar">
+        <div class="nav-container">
+            <div class="logo">WINMA TOTS 🌟</div>
+            <ul class="nav-links">
+                <li><a onclick="scrollToSection('home')">Home</a></li>
+                <li><a onclick="scrollToSection('features')">Features</a></li>
+                <li><a onclick="scrollToSection('programs')">Programs</a></li>
+                <li><a onclick="scrollToSection('gallery')">Gallery</a></li>
+                <li><a onclick="scrollToSection('contact')">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="floating-shapes">
+            <div class="shape circle"></div>
+            <div class="shape triangle"></div>
+            <div class="shape square"></div>
+        </div>
+        <div class="hero-content">
+            <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;">WINMA TOTS </h1>
+            <p style="font-style: oblique;">Daycare $ pre-school</p>
+            <p>Where Creativity Meets Early Learning</p>
+            <a href="#" class="cta-button" onclick="scrollToSection('contact')">Enroll Your Child Today</a>
+        </div>
+    </section>
+
+    <section class="section" id="features">
+        <h2 style="color: #feca57;">Why Choose WINMA TOTS?</h2>
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number">100+</span>
+                <span>Happy Children</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">2</span>
+                <span>Years Experience</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">15</span>
+                <span>Expert Teachers</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">98%</span>
+                <span>Parent Satisfaction</span>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Creative Arts</h3>
+                <p>Nurturing imagination through painting, crafts, music, and dramatic play that develops fine motor skills and self-expression.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>STEM Learning</h3>
+                <p>Interactive science experiments, building blocks, and problem-solving activities that make learning fun and engaging.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <h3>Social Skills</h3>
+                <p>Group activities, collaborative play, and communication exercises that build confidence and interpersonal skills.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌱</div>
+                <h3>Nature Exploration</h3>
+                <p>Outdoor adventures, gardening projects, and environmental awareness activities that connect children with nature.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Language Development</h3>
+                <p>Storytelling, reading circles, and multilingual exposure that enhances vocabulary and communication skills.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏃</div>
+                <h3>Physical Development</h3>
+                <p>Age-appropriate exercises, yoga, dance, and playground activities that promote healthy physical growth.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section programs" id="programs">
+        <h2>Our Programs</h2>
+        <div class="program-grid">
+            <div class="program-card">
+                <h3>🍼 Infant Care (6-18 months)</h3>
+                <p>Loving care with sensory play, music, and gentle learning activities in a safe, nurturing environment.</p>
+                <p><strong>Hours:</strong> 7:00 AM - 6:00 PM</p>
+            </div>
+            <div class="program-card">
+                <h3>🧸 Toddler Program (18 months - 3 years)</h3>
+                <p>Interactive play-based learning focusing on language development, social skills, and creative expression.</p>
+                <p><strong>Hours:</strong> 7:00 AM - 6:00 PM</p>
+            </div>
+            <div class="program-card">
+                <h3>🎒 Pre-K Program (3-5 years)</h3>
+                <p>School readiness preparation with early literacy, math concepts, and independence skills.</p>
+                <p><strong>Hours:</strong> 7:00 AM - 6:00 PM</p>
+            </div>
+            <div class="program-card">
+                <h3>🌞 Summer Camp</h3>
+                <p>Exciting themed weeks with field trips, special activities, and extended outdoor exploration time.</p>
+                <p><strong>Ages:</strong> 2-12 years</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section interactive-gallery" id="gallery">
+        <h2>Our Learning Environment</h2>
+        
+        <!-- Gallery Category Tabs -->
+        <div class="gallery-tabs">
+            <div class="gallery-tab active" data-category="all">All Photos</div>
+            <div class="gallery-tab" data-category="classrooms">Classrooms</div>
+            <div class="gallery-tab" data-category="playground">Playground</div>
+            <div class="gallery-tab" data-category="activities">Activities</div>
+            <div class="gallery-tab" data-category="facilities">Facilities</div>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- CLASSROOMS CATEGORY -->
+            <div class="gallery-item" data-category="classrooms">
+                <!-- Replace 'your-image-url-here.jpg' with your actual image URL -->
+                <img class="gallery-item-image" src="winmanphotos/images (3).jpeg" alt="Art Studio" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="gallery-item-placeholder" style="display: none;">
+                    <div>🎨</div>
+                    <div style="font-size: 1rem; margin-top: 1rem; text-align: center;">Art Studio</div>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="gallery-item-title">Creative Art Studio</div>
+                    <div class="gallery-item-description">Where young artists explore colors, textures, and imagination through various art mediums.</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="classrooms">
+                <!-- TO ADD YOUR IMAGE: Replace the src with your image URL -->
+                <img class="gallery-item-image" src="winmanphotos/images (2).jpeg" alt="Reading Corner" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="gallery-item-placeholder" style="display: none;">
+                    <div>📚</div>
+                    <div style="font-size: 1rem; margin-top: 1rem; text-align: center;">Reading Corner</div>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="gallery-item-title">Cozy Reading Corner</div>
+                    <div class="gallery-item-description">A quiet space filled with age-appropriate books and comfortable seating for story time.</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="classrooms">
+                <!-- TO ADD YOUR IMAGE: Replace the src with your image URL -->
+                <img class="gallery-item-image" src="winmanphotos/images (1).jpeg" alt="Science Lab" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="gallery-item-placeholder" style="display: none;">
+                    <div>🔬</div>
+                    <div style="font-size: 1rem; margin-top: 1rem; text-align: center;">Science Lab</div>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="gallery-item-title">Discovery Science Lab</div>
+                    <div class="gallery-item-description">Hands-on experiments and exploration stations that make science fun and accessible.</div>
+                </div>
+            </div>
+
+            <!-- PLAYGROUND CATEGORY -->
+            <div class="gallery-item" data-category="playground">
+                <!-- TO ADD YOUR IMAGE: Replace the src with your image URL -->
+                <img class="gallery-item-image" src="winmanphotos/download.jpeg" alt="Playground" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="gallery-item-placeholder" style="display: none;">
+                    <div>🏃</div>
+                    <div style="font-size: 1rem; margin-top: 1rem; text-align: center;">Playground</div>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="gallery-item-title">Adventure Playground</div>
+                    <div class="gallery-item-description">Safe, age-appropriate equipment designed to develop gross motor skills and encourage active play.</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="playground">
+                <!-- TO ADD YOUR IMAGE: Replace the src with your image URL -->
+                <img class="gallery-item-image" src="winmanphotos/download (2).jpeg" alt="Outdoor Play" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="gallery-item-placeholder" style="display: none;">
+                    <div>🌳</div>
+                    <div style="font-size: 1rem; margin-top: 1rem; text-align: center;">Outdoor Play</div>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="gallery-item-title">Outdoor Play Area</div>
+                    <div class="gallery-item-description">Natural outdoor environment for fresh air activities and nature exploration.</div>
+                </div>
+            </div>
+
+            <!-- ACTIVITIES CATEGORY -->
+            <div class="gallery-item" data-category="activities">
+                <!-- TO ADD YOUR IMAGE: Replace the src with your image URL -->
+                <img class="gallery-item-image" src="winmanphotos/download (1).jpeg" alt="Music Room" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="gallery-item-placeholder" style="display: none;">
+                    <div>🎵</div>
+                    <div style="font-size: 1rem; margin-top: 1rem; text-align: center;">Music Room</div>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="gallery-item-title">Musical Expression Room</div>
+                    <div class="gallery-item-description">Instruments, singing, and rhythm activities that develop auditory skills and creativity.</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="activities">
+                <!-- TO ADD YOUR IMAGE: Replace the src with your image URL -->
+                <img class="gallery-item-image" src="winmanphotos/download (3).jpeg" alt="Activity Time" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="gallery-item-placeholder" style="display: none;">
+                    <div>🧩</div>
+                    <div style="font-size: 1rem; margin-top: 1rem; text-align: center;">Activity Time</div>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="gallery-item-title">Problem-Solving Activities</div>
+                    <div class="gallery-item-description">Puzzles, building blocks, and brain games that enhance cognitive development.</div>
+                </div>
+            </div>
+
+            <!-- FACILITIES CATEGORY -->
+            <div class="gallery-item" data-category="facilities">
+                <!-- TO ADD YOUR IMAGE: Replace the src with your image URL -->
+                <img class="gallery-item-image" src="winmanphotos/download (4).jpeg" alt="Garden Area" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="gallery-item-placeholder" style="display: none;">
+                    <div>🌱</div>
+                    <div style="font-size: 1rem; margin-top: 1rem; text-align: center;">Garden Area</div>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="gallery-item-title">Learning Garden</div>
+                    <div class="gallery-item-description">Outdoor space where children learn about nature, plants, and environmental responsibility.</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="facilities">
+                <!-- TO ADD YOUR IMAGE: Replace the src with your image URL -->
+                <img class="gallery-item-image" src="winmanphotos/download (5).jpeg" alt="Kitchen Lab" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="gallery-item-placeholder" style="display: none;">
+                    <div>🍎</div>
+                    <div style="font-size: 1rem; margin-top: 1rem; text-align: center;">Kitchen Lab</div>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="gallery-item-title">Nutrition Kitchen Lab</div>
+                    <div class="gallery-item-description">Child-safe cooking activities that teach healthy eating and basic culinary skills.</div>
+                </div>
+            </div>
+
+            <!-- EASY TEMPLATE FOR ADDING NEW IMAGES -->
+            <!-- Copy this template and modify it to add more images -->
+            <!--
+            <div class="gallery-item" data-category="CHOOSE: classrooms/playground/activities/facilities">
+                <img class="gallery-item-image" src="YOUR_IMAGE_URL_HERE" alt="Your Alt Text" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="gallery-item-placeholder" style="display: none;">
+                    <div>🎨</div>
+                    <div style="font-size: 1rem; margin-top: 1rem; text-align: center;">Fallback Name</div>
+                </div>
+                <div class="gallery-item-overlay">
+                    <div class="gallery-item-title">Your Image Title</div>
+                    <div class="gallery-item-description">Your image description here.</div>
+                </div>
+            </div>
+            -->
+        </div>
+
+       
+        <!-- Image Modal -->
+        <div class="gallery-modal" id="galleryModal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <img class="modal-image" id="modalImage" src="" alt="">
+                <div class="modal-info">
+                    <h3 id="modalTitle"></h3>
+                    <p id="modalDescription"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section contact" id="contact">
+        <h2>Get In Touch</h2>
+        <div class="contact-form">
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Parent's Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Child's Name & Age">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Tell us about your needs and any questions you have..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Schedule a Visit</button>
+            </form>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+            <p>📍  kibumbiro Dome Street, opposite Taff playground</p>
+            <p>📞 (+256)  705 502439 | ✉️ winmatots@.com</p>
+        </div>
+    </section>
+
+    <div class="floating-button" onclick="scrollToSection('home')" title="Back to Top">
+        ↑
+    </div>
+
+    <script>
+        // Smooth scrolling navigation
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Create success message
+            const successMsg = document.createElement('div');
+            successMsg.innerHTML = '✅ Thank you! We\'ll contact you within 24 hours to schedule your visit.';
+            successMsg.style.cssText = `
+                background: linear-gradient(45deg, #00d4aa, #00b894);
+                color: white;
+                padding: 1rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+                text-align: center;
+                animation: fadeInUp 0.5s ease-out;
+            `;
+            
+            this.appendChild(successMsg);
+            this.reset();
+            
+            // Remove message after 5 seconds
+            setTimeout(() => {
+                successMsg.remove();
+            }, 5000);
+        });
+
+        // Gallery functionality
+        let galleryImages = [];
+        
+        // Category filtering
+        document.querySelectorAll('.gallery-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                filterGallery(category);
+            });
+        });
+
+        function filterGallery(category) {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            galleryItems.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                    item.style.animation = 'fadeInUp 0.5s ease-out';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Image upload functionality
+        document.getElementById('imageUpload').addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            
+            files.forEach((file, index) => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        addImageToGallery(e.target.result, file.name, 'uploaded');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Show success message
+            showUploadSuccess(files.length);
+        });
+
+        function addImageToGallery(imageSrc, fileName, category) {
+            const galleryGrid = document.getElementById('galleryGrid');
+            const uploadSection = document.getElementById('uploadSection');
+            
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            galleryItem.dataset.category = category;
+            
+            galleryItem.innerHTML = `
+                <img class="gallery-item-image" src="${imageSrc}" alt="${fileName}">
+                <div class="gallery-item-overlay">
+                    <div class="gallery-item-title">${fileName.replace(/\.[^/.]+$/, "").replace(/[-_]/g, ' ')}</div>
+                    <div class="gallery-item-description">Uploaded image showcasing our wonderful facilities and activities.</div>
+                </div>
+            `;
+            
+            // Add click event for modal
+            galleryItem.addEventListener('click', function() {
+                openModal(imageSrc, fileName.replace(/\.[^/.]+$/, "").replace(/[-_]/g, ' '), 'Uploaded image showcasing our wonderful facilities and activities.');
+            });
+            
+            // Insert before upload section
+            galleryGrid.insertBefore(galleryItem, uploadSection);
+            
+            // Add entrance animation
+            galleryItem.style.animation = 'fadeInUp 0.5s ease-out';
+        }
+
+        function showUploadSuccess(count) {
+            const uploadSection = document.getElementById('uploadSection');
+            const successMsg = document.createElement('div');
+            successMsg.innerHTML = `✅ Successfully uploaded ${count} image(s)!`;
+            successMsg.style.cssText = `
+                background: linear-gradient(45deg, #00d4aa, #00b894);
+                color: white;
+                padding: 1rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+                text-align: center;
+                animation: fadeInUp 0.5s ease-out;
+            `;
+            
+            uploadSection.appendChild(successMsg);
+            
+            // Remove message after 3 seconds
+            setTimeout(() => {
+                successMsg.remove();
+            }, 3000);
+        }
+
+        // Modal functionality
+        function openModal(imageSrc, title, description) {
+            const modal = document.getElementById('galleryModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            modalImage.src = imageSrc;
+            modalTitle.textContent = title;
+            modalDescription.textContent = description;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('galleryModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('galleryModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Add click events to existing gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const title = this.querySelector('.gallery-item-title')?.textContent || 'Gallery Item';
+                const description = this.querySelector('.gallery-item-description')?.textContent || 'A wonderful part of our learning environment.';
+                
+                // For placeholder items, create a sample image
+                const canvas = document.createElement('canvas');
+                canvas.width = 600;
+                canvas.height = 400;
+                const ctx = canvas.getContext('2d');
+                
+                // Create gradient background
+                const gradient = ctx.createLinearGradient(0, 0, 600, 400);
+                gradient.addColorStop(0, '#667eea');
+                gradient.addColorStop(1, '#764ba2');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, 600, 400);
+                
+                // Add emoji/icon
+                const emoji = this.querySelector('.gallery-item-placeholder div').textContent;
+                ctx.font = '100px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillStyle = 'white';
+                ctx.fillText(emoji, 300, 250);
+                
+                const imageSrc = canvas.toDataURL();
+                openModal(imageSrc, title, description);
+            });
+        });
+
+        // Feature cards click interaction
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Create a ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(102, 126, 234, 0.3);
+                    width: 100px;
+                    height: 100px;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%) scale(0);
+                    animation: ripple 0.6s ease-out;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: translate(-50%, -50%) scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add floating animation to hero shapes
+        document.querySelectorAll('.shape').forEach((shape, index) => {
+            setInterval(() => {
+                const randomX = Math.random() * 20 - 10;
+                const randomY = Math.random() * 20 - 10;
+                shape.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            }, 3000 + index * 1000);
+        });
+
+        // Stats counter animation
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target + (element.textContent.includes('%') ? '%' : (element.textContent.includes('+') ? '+' : ''));
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start) + (element.textContent.includes('%') ? '%' : (element.textContent.includes('+') ? '+' : ''));
+                }
+            }, 16);
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('stat-number')) {
+                        const target = parseInt(entry.target.textContent);
+                        animateCounter(entry.target, target);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe stat numbers
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            observer.observe(stat);
+        });
+    </script>
+</body>
+</html>
